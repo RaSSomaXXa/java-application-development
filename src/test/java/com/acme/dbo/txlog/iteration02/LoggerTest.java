@@ -30,7 +30,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log(2);
         Facade.log("str 2");
         Facade.log(0);
-        Facade.flush();
+        Facade.flushInt();
         //endregion
 
         //region then
@@ -40,9 +40,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0");
         //endregion
     }
-
-        /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
@@ -55,6 +52,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log("str 3");
         Facade.log("str 3");
         Facade.log("str 3");
+        Facade.flushString();
         //endregion
 
         //region then
@@ -63,9 +61,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("0");
         assertSysoutContains("str 2");
         assertSysoutContains("str 3 (x3)");
-        );
         //endregion
     }
+
+        /*
+    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {

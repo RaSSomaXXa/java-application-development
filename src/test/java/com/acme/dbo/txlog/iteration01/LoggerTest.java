@@ -26,11 +26,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Facade.log(1);
-        Facade.flush();
+        Facade.flushInt();
         Facade.log(0);
-        Facade.flush();
+        Facade.flushInt();
         Facade.log(-1);
-        Facade.flush();
+        Facade.flushInt();
         //endregion
 
         //region then
@@ -75,7 +75,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogString() throws IOException {
         //region when
         Facade.log("test string 1");
+        Facade.flushString();
         Facade.log("other str");
+        Facade.flushString();
         //endregion
 
         //region then
