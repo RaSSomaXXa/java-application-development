@@ -1,12 +1,14 @@
 package com.acme.dbo.txlog.iteration02;
 
 import com.acme.dbo.txlog.Facade;
+import com.acme.dbo.txlog.MessageAccumulator;
 import com.acme.dbo.txlog.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -30,7 +32,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log(2);
         Facade.log("str 2");
         Facade.log(0);
-        Facade.flushInt();
+        MessageAccumulator.flushInteger();
         //endregion
 
         //region then
@@ -52,7 +54,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log("str 3");
         Facade.log("str 3");
         Facade.log("str 3");
-        Facade.flushString();
+        MessageAccumulator.flushString();
         //endregion
 
         //region then
@@ -64,9 +66,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-        /*
-    TODO: implement Logger solution to match specification as tests
-
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -75,16 +74,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log(Integer.MAX_VALUE);
         Facade.log("str 2");
         Facade.log(0);
+        MessageAccumulator.flushInteger();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            Integer.MAX_VALUE + "\n" +
-            "10\n" +
-            "str 2\n" +
-            "0\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains(Objects.toString(Integer.MAX_VALUE));
+        assertSysoutContains("10");
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
         //endregion
     }
 
@@ -96,18 +94,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log((byte)Byte.MAX_VALUE);
         Facade.log("str 2");
         Facade.log(0);
+        MessageAccumulator.flushInteger();
         //endregion
 
         //region then
-        assertSysoutEquals(
-            "str 1\n" +
-            Byte.MAX_VALUE + "\n" +
-            "10\n" +
-            "str 2\n" +
-            "0\n"
-        );
+        assertSysoutContains("str 1");
+        assertSysoutContains(Objects.toString(Byte.MAX_VALUE));
+        assertSysoutContains("10");
+        assertSysoutContains("str 2");
+        assertSysoutContains("0");
         //endregion
     }
-
-    */
 }
