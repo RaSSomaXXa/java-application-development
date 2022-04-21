@@ -1,7 +1,6 @@
 package com.acme.dbo.txlog.iteration02;
 
 import com.acme.dbo.txlog.Facade;
-import com.acme.dbo.txlog.MessageAccumulator;
 import com.acme.dbo.txlog.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +31,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log(2);
         Facade.log("str 2");
         Facade.log(0);
-        MessageAccumulator.flushInteger();
+        Facade.flushInteger();
         //endregion
 
         //region then
@@ -54,7 +53,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log("str 3");
         Facade.log("str 3");
         Facade.log("str 3");
-        MessageAccumulator.flushString();
+        Facade.flushString();
         //endregion
 
         //region then
@@ -74,7 +73,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log(Integer.MAX_VALUE);
         Facade.log("str 2");
         Facade.log(0);
-        MessageAccumulator.flushInteger();
+        Facade.flushInteger();
         //endregion
 
         //region then
@@ -94,7 +93,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log((byte)Byte.MAX_VALUE);
         Facade.log("str 2");
         Facade.log(0);
-        MessageAccumulator.flushInteger();
+        Facade.flushInteger();
         //endregion
 
         //region then
