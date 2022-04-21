@@ -14,23 +14,15 @@ public class Facade {
     private static String lastMessage;
 
     public static void log(int message) {
-        if (isActiveStringFlush()) {
-            flushString();
-        }
-        if (isActiveByteFlush()) {
-            flushByte();
-        }
+        if (isActiveStringFlush()) flushString();
+        if (isActiveByteFlush()) flushByte();
         setActiveIntegerFlush();
         IntegerAccumulator(message);
     }
 
     public static void log(byte message) {
-        if (isActiveStringFlush()) {
-            flushString();
-        }
-        if (isActiveIntegerFlush()) {
-            flushInteger();
-        }
+        if (isActiveStringFlush()) flushString();
+        if (isActiveIntegerFlush()) flushInteger();
         setActiveByteFlush();
         ByteAccumulator(message);
     }
@@ -40,15 +32,9 @@ public class Facade {
     }
 
     public static void log(String message) {
-        if (isActiveIntegerFlush()) {
-            flushInteger();
-        }
-        if (isActiveByteFlush()) {
-            flushByte();
-        }
-        if (isChangedStringMessage(message)) {
-            flushString();
-        }
+        if (isActiveIntegerFlush()) flushInteger();
+        if (isActiveByteFlush()) flushByte();
+        if (isChangedStringMessage(message)) flushString();
         setActiveStringFlush();
         StringAccumulator(message);
     }
@@ -60,7 +46,6 @@ public class Facade {
     public static void log(Object message) {
         ConsoleMessagePrinter.printMessage(PrefixMessageDecorator.decorateMessage(message));
     }
-
 
     private static boolean isActiveStringFlush() {
         return NeedStringFlush;
