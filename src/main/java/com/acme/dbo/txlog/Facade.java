@@ -47,6 +47,26 @@ public class Facade {
         ConsoleMessagePrinter.printMessage(PrefixMessageDecorator.decorateMessage(message));
     }
 
+    public static void log(int[] message) {
+        ConsoleMessagePrinter.printMessage((PrefixMessageDecorator.decorateMessage(message)));
+    }
+
+    public static void log(int[][] message) {
+        ConsoleMessagePrinter.printMessage((PrefixMessageDecorator.decorateMessage(message)));
+    }
+
+    public static void log(int[][][][] message) {
+        ConsoleMessagePrinter.printMessage((PrefixMessageDecorator.decorateMessage(message)));
+    }
+
+    public static void log(String... message) {
+        ConsoleMessagePrinter.printMessage((PrefixMessageDecorator.decorateMessage(message)));
+    }
+
+    public static void log(Integer... message) {
+        ConsoleMessagePrinter.printMessage((PrefixMessageDecorator.decorateMessage(message)));
+    }
+
     private static boolean isActiveStringFlush() {
         return NeedStringFlush;
     }

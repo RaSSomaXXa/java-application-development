@@ -1,10 +1,13 @@
 package com.acme.dbo.txlog.iteration03;
 
+import com.acme.dbo.txlog.Facade;
 import com.acme.dbo.txlog.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -20,8 +23,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    /*
-    TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogIntegersArray() throws IOException {
@@ -31,10 +32,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
+            "primitives array: {-1, 0, 1}" + System.lineSeparator()
         );
         //endregion
     }
+
 
     @Test
     public void shouldLogIntegersMatrix() throws IOException {
@@ -44,14 +46,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
+            "primitives matrix: {" + System.lineSeparator() +
+                "{-1, 0, 1}" + System.lineSeparator() +
+                "{1, 2, 3}" + System.lineSeparator() +
+                "{-1, -2, -3}" + System.lineSeparator() +
+            "}" + System.lineSeparator()
         );
         //endregion
     }
+
 
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
@@ -61,14 +64,15 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "primitives multimatrix: {\n" +
-                "{\n" + "{\n" + "{\n" +
-                    "0\n" +
-                "}\n" + "}\n" + "}\n" +
-            "}\n"
+            "primitives multimatrix: {" + System.lineSeparator() +
+                "{" + System.lineSeparator() + "{" + System.lineSeparator() + "{" + System.lineSeparator() +
+                    "0" + System.lineSeparator() +
+                "}" + System.lineSeparator() + "}" + System.lineSeparator() + "}" + System.lineSeparator() +
+            "}" + System.lineSeparator()
         );
         //endregion
     }
+
 
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
@@ -77,7 +81,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
 
         //region then
-        assertSysoutContains("str1\nstring 2\nstr 3");
+        assertSysoutContains("str1" + System.lineSeparator() + "string 2" + System.lineSeparator() + "str 3");
         //endregion
     }
 
@@ -92,22 +96,26 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
+
     @Test
     public void shouldCorrectDealWithIntegerOverflowWhenOneMethodCall() throws IOException {
         //region when
         Facade.log(1);
         Facade.log("str");
         Facade.log(Integer.MAX_VALUE - 10);
+        Facade.flushInteger();
         Facade.log(11);
+        Facade.flushInteger();
         //endregion
 
         //region then
-        assertSysoutContains(1);
+        assertSysoutContains("1");
         assertSysoutContains("str");
-        assertSysoutContains(Integer.MAX_VALUE - 10);
-        assertSysoutContains(11);
+        assertSysoutContains(String.valueOf(Objects.toString(Integer.MAX_VALUE - 10)));
+        assertSysoutContains(String.valueOf("11"));
         //endregion
     }
 
-    */
+
 }
