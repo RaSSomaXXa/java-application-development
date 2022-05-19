@@ -1,12 +1,13 @@
-package com.acme.dbo.txlog;
+package com.acme.dbo.txlog.service;
 
+import com.acme.dbo.txlog.ConsoleMessagePrinter;
+import com.acme.dbo.txlog.PrefixMessageDecorator;
 import com.acme.dbo.txlog.domain.IntMessage;
 import com.acme.dbo.txlog.domain.StringMessage;
-import com.acme.dbo.txlog.service.LogService;
 
 import java.util.Objects;
 
-public class Facade {
+public class LogService {
     private static long IntegerAccumulator;
     private static long IntegerOverflowCount;
     private static int StringAccumulator;
@@ -17,17 +18,17 @@ public class Facade {
     private static boolean NeedByteFlush;
     private static String lastMessage;
 
-    static LogService logService = new LogService();
+    ConsoleMessagePrinter consoleMessagePrinter = new ConsoleMessagePrinter();
+    PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
 
-    public static void log(int message) {
-        logService.log(message);
+    public void log(IntMessage message) {
+        if (isActiveStringFlush()) flushString();
+        if (isActiveByteFlush()) flushByte();
+        setActiveIntegerFlush();
+        IntegerAccumulator(message.getBody());
     }
 
-    public static void flushInteger() {
-        logService.flushInteger();
-    }
-
-/*    public void log(byte message) {
+    public void log(byte message) {
         if (isActiveStringFlush()) flushString();
         if (isActiveIntegerFlush()) flushInteger();
         setActiveByteFlush();
@@ -153,6 +154,4 @@ public class Facade {
             IntegerAccumulator = IntegerAccumulator % Integer.MAX_VALUE;
         }
     }
-
- */
 }
