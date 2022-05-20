@@ -7,25 +7,46 @@ import com.acme.dbo.txlog.service.LogService;
 import java.util.Objects;
 
 public class Facade {
-    private static long IntegerAccumulator;
-    private static long IntegerOverflowCount;
-    private static int StringAccumulator;
-    private static int ByteAccumulator;
-    private static int ByteOverflowCount;
-    private static boolean NeedIntegerFlush;
-    private static boolean NeedStringFlush;
-    private static boolean NeedByteFlush;
-    private static String lastMessage;
 
-    static LogService logService = new LogService();
+    private static LogService logService = new LogService();
 
     public static void log(int message) {
+        logService.log(new IntMessage(message));
+    }
+
+    public static void log(byte message) {
+        logService.log(message);
+    }
+
+    public static void log(char message) {
+        logService.log(message);
+    }
+
+    public static void log(String message) {
+        logService.log(new StringMessage(message));
+    }
+
+    public static void log(boolean message) {
+        logService.log(message);
+    }
+
+    public static void log(Object message) {
         logService.log(message);
     }
 
     public static void flushInteger() {
         logService.flushInteger();
     }
+
+    public static void flushByte() {
+        logService.flushByte();
+    }
+
+    public static void flushString() {
+        logService.flushString();
+    }
+
+
 
 /*    public void log(byte message) {
         if (isActiveStringFlush()) flushString();

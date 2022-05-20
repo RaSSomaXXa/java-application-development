@@ -8,24 +8,24 @@ import com.acme.dbo.txlog.domain.StringMessage;
 import java.util.Objects;
 
 public class LogService {
-    private static long IntegerAccumulator;
-    private static long IntegerOverflowCount;
-    private static int StringAccumulator;
-    private static int ByteAccumulator;
-    private static int ByteOverflowCount;
-    private static boolean NeedIntegerFlush;
-    private static boolean NeedStringFlush;
-    private static boolean NeedByteFlush;
-    private static String lastMessage;
+    private long IntegerAccumulator;
+    private long IntegerOverflowCount;
+    private int StringAccumulator;
+    private int ByteAccumulator;
+    private int ByteOverflowCount;
+    private boolean NeedIntegerFlush;
+    private boolean NeedStringFlush;
+    private boolean NeedByteFlush;
+    private String lastMessage;
 
     ConsoleMessagePrinter consoleMessagePrinter = new ConsoleMessagePrinter();
     PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
 
     public void log(IntMessage message) {
-        if (isActiveStringFlush()) flushString();
-        if (isActiveByteFlush()) flushByte();
-        setActiveIntegerFlush();
-        IntegerAccumulator(message.getBody());
+        if (this.isActiveStringFlush()) flushString();
+        if (this.isActiveByteFlush()) flushByte();
+        this.setActiveIntegerFlush();
+        this.IntegerAccumulator(message.getBody());
     }
 
     public void log(byte message) {
@@ -54,7 +54,6 @@ public class LogService {
     public void log(Object message) {
         consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage(message));
     }
-
     public void log(int[] message) {
         consoleMessagePrinter.printMessage((prefixMessageDecorator.decorateMessage(message)));
     }
@@ -74,6 +73,7 @@ public class LogService {
     public void log(Integer... message) {
         consoleMessagePrinter.printMessage((prefixMessageDecorator.decorateMessage(message)));
     }
+
 
     private boolean isActiveStringFlush() {
         return NeedStringFlush;
@@ -135,8 +135,8 @@ public class LogService {
     }
 
     private void StringAccumulator(String message) {
-        lastMessage = message;
-        StringAccumulator++;
+        this.lastMessage = message;
+        this.StringAccumulator++;
     }
 
     private void ByteAccumulator(byte message) {
@@ -148,7 +148,7 @@ public class LogService {
     }
 
     private void IntegerAccumulator(int message) {
-        IntegerAccumulator += message;
+        this.IntegerAccumulator += message;
         if (IntegerAccumulator > Integer.MAX_VALUE) {
             IntegerOverflowCount = IntegerAccumulator / Integer.MAX_VALUE;
             IntegerAccumulator = IntegerAccumulator % Integer.MAX_VALUE;

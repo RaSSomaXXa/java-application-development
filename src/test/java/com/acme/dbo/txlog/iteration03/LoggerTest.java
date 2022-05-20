@@ -23,6 +23,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
+    /*
 
     @Test
     public void shouldLogIntegersArray() throws IOException {
@@ -32,7 +33,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}" + System.lineSeparator()
+                "primitives array: {-1, 0, 1}" + System.lineSeparator()
         );
         //endregion
     }
@@ -117,5 +118,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+     */
 
 }

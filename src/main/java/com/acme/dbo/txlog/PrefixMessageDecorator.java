@@ -12,8 +12,8 @@ public class PrefixMessageDecorator {
     private static final String PRIMITIVES_MATRIX_PREFIX = "primitives matrix";
     private static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix";
 
-    public String decorateMessage(IntMessage message) {
-        return PRIMITIVE_PREFIX + ": " + message.getBody();
+    public String decorateMessage(int message) {
+        return PRIMITIVE_PREFIX + ": " + message;
     }
 
     public static String decorateMessage(byte message) {
@@ -24,8 +24,8 @@ public class PrefixMessageDecorator {
         return CHAR_PREFIX + ": " + message;
     }
 
-    public String decorateMessage(StringMessage message) {
-        return STRING_PREFIX + ": " + message.getBody();
+    public String decorateMessage(String message) {
+        return STRING_PREFIX + ": " + message;
     }
 
     public static String decorateMessage(boolean message) {
