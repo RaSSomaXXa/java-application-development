@@ -1,7 +1,4 @@
-package com.acme.dbo.txlog;
-
-import com.acme.dbo.txlog.domain.IntMessage;
-import com.acme.dbo.txlog.domain.StringMessage;
+package com.acme.dbo.txlog.decorator;
 
 public class PrefixMessageDecorator {
     private static final String PRIMITIVE_PREFIX = "primitive";

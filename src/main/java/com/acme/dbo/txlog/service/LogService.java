@@ -1,7 +1,8 @@
 package com.acme.dbo.txlog.service;
 
-import com.acme.dbo.txlog.ConsoleMessagePrinter;
-import com.acme.dbo.txlog.PrefixMessageDecorator;
+import com.acme.dbo.txlog.printer.ConsoleMessagePrinter;
+import com.acme.dbo.txlog.printer.MessagePrinter;
+import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
 import com.acme.dbo.txlog.domain.IntMessage;
 import com.acme.dbo.txlog.domain.StringMessage;
 
@@ -18,7 +19,7 @@ public class LogService {
     private boolean NeedByteFlush;
     private String lastMessage;
 
-    ConsoleMessagePrinter consoleMessagePrinter = new ConsoleMessagePrinter();
+    MessagePrinter MessagePrinter = new ConsoleMessagePrinter();
     PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
 
     public void log(IntMessage message) {
@@ -36,7 +37,7 @@ public class LogService {
     }
 
     public void log(char message) {
-        consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage(message));
+        MessagePrinter.print(prefixMessageDecorator.decorateMessage(message));
     }
 
     public void log(StringMessage message) {
@@ -48,30 +49,30 @@ public class LogService {
     }
 
     public void log(boolean message) {
-        consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage(message));
+        MessagePrinter.print(prefixMessageDecorator.decorateMessage(message));
     }
 
     public void log(Object message) {
-        consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage(message));
+        MessagePrinter.print(prefixMessageDecorator.decorateMessage(message));
     }
     public void log(int[] message) {
-        consoleMessagePrinter.printMessage((prefixMessageDecorator.decorateMessage(message)));
+        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(int[][] message) {
-        consoleMessagePrinter.printMessage((prefixMessageDecorator.decorateMessage(message)));
+        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(int[][][][] message) {
-        consoleMessagePrinter.printMessage((prefixMessageDecorator.decorateMessage(message)));
+        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(String... message) {
-        consoleMessagePrinter.printMessage((prefixMessageDecorator.decorateMessage(message)));
+        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(Integer... message) {
-        consoleMessagePrinter.printMessage((prefixMessageDecorator.decorateMessage(message)));
+        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
 
@@ -101,9 +102,9 @@ public class LogService {
 
     public void flushInteger() {
         for (int i = 0; i < IntegerOverflowCount; i++) {
-            consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage((int)Integer.MAX_VALUE));
+            MessagePrinter.print(prefixMessageDecorator.decorateMessage((int)Integer.MAX_VALUE));
         }
-        consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage((int)IntegerAccumulator));
+        MessagePrinter.print(prefixMessageDecorator.decorateMessage((int)IntegerAccumulator));
         IntegerAccumulator = 0;
         IntegerOverflowCount = 0;
         NeedIntegerFlush = false;
@@ -111,9 +112,9 @@ public class LogService {
 
     public void flushByte() {
         for (int i = 0; i < ByteOverflowCount; i++) {
-            consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage((byte)Byte.MAX_VALUE));
+            MessagePrinter.print(prefixMessageDecorator.decorateMessage((byte)Byte.MAX_VALUE));
         }
-        consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage((byte)ByteAccumulator));
+        MessagePrinter.print(prefixMessageDecorator.decorateMessage((byte)ByteAccumulator));
         ByteAccumulator = 0;
         ByteOverflowCount = 0;
         NeedByteFlush = false;
@@ -121,9 +122,9 @@ public class LogService {
 
     public void flushString() {
         if (StringAccumulator == 1) {
-            consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage(lastMessage));
+            MessagePrinter.print(prefixMessageDecorator.decorateMessage(lastMessage));
         } else if (StringAccumulator > 1) {
-            consoleMessagePrinter.printMessage(prefixMessageDecorator.decorateMessage(lastMessage + " (x" + StringAccumulator) + ")");
+            MessagePrinter.print(prefixMessageDecorator.decorateMessage(lastMessage + " (x" + StringAccumulator) + ")");
         }
         StringAccumulator = 0;
         lastMessage = null;
