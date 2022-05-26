@@ -23,4 +23,9 @@ public class ObjectMessage extends PrefixMessageDecorator {
     public void accumulate(Message message) {
 
     }
+
+    @Override
+    public void flush() {
+
+    }
 }

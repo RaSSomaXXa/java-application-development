@@ -34,4 +34,9 @@ public class CharMessage extends PrefixMessageDecorator {
         this.body += ((CharMessage)message).body;
     }
 
+    @Override
+    public void flush() {
+        this.setBody(' ');
+    }
+
 }

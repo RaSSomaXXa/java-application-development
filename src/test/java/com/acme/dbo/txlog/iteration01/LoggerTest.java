@@ -123,7 +123,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log(-3);
         Facade.log("str");
 
-        assertSysoutEquals("primitive: 2");
+        assertSysoutEquals("primitive: 2"  + System.lineSeparator());
     }
 
 }

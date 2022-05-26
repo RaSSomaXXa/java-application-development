@@ -4,6 +4,8 @@ import com.acme.dbo.txlog.domain.Message;
 import com.acme.dbo.txlog.printer.ConsoleMessagePrinter;
 import com.acme.dbo.txlog.printer.MessagePrinter;
 
+import java.util.Objects;
+
 
 public class LogService {
 
@@ -18,15 +20,18 @@ public class LogService {
 
     private Message lastMessage;
     //should add logic for NPE when it's not initialize;
-    //as idea - replace messsage and lastMessage into equal...but also need protect from null;
+    //as idea - replace message and lastMessage into equal...but also need protect from null;
+    //also it's look like better to use DI;
 
     private MessagePrinter printer = new ConsoleMessagePrinter();
 
     public void log(Message message) {
-        if (message.isSame(lastMessage)) {
+        if (!(Objects.equals(null,lastMessage)) && lastMessage.isSame(message)) {
             lastMessage.accumulate(message);
-        } else {
+        } else if (!(Objects.equals(null,lastMessage))){
             printer.print(lastMessage.decorate());
+        } else {
+            lastMessage = message;
         }
     }
 

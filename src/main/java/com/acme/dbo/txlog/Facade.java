@@ -33,11 +33,12 @@ public class Facade {
         logService.log(new ObjectMessage());
     }
 
-    /*
 
     public static void flushInteger() {
-        logService.flushInteger();
+
     }
+
+    /*
 
     public static void flushByte() {
         logService.flushByte();

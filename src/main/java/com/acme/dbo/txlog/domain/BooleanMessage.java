@@ -34,4 +34,9 @@ public class BooleanMessage extends PrefixMessageDecorator {
         this.body = this.body & ((BooleanMessage)message).getBody();
     }
 
+    @Override
+    public void flush() {
+        this.setBody(false);
+    }
+
 }

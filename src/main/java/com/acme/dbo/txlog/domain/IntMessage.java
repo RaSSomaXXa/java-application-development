@@ -34,4 +34,7 @@ public class IntMessage extends PrefixMessageDecorator {
         this.body += ((IntMessage)message).getBody();
     }
 
+    public void flush() {
+        this.setBody(0);
+    }
 }

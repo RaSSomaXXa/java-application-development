@@ -34,4 +34,9 @@ public class ByteMessage extends PrefixMessageDecorator {
         this.body += ((ByteMessage)message).body;
     }
 
+    @Override
+    public void flush() {
+        this.setBody((byte)0);
+    }
+
 }

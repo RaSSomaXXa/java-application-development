@@ -33,4 +33,9 @@ public class StringMessage extends PrefixMessageDecorator {
     public void accumulate(Message message) {
         this.body += ((StringMessage)message).getBody();
     }
+
+    @Override
+    public void flush() {
+        this.setBody("");
+    }
 }
