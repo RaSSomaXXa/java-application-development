@@ -117,4 +117,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+    @Test
+    public void shouldLogIntState() throws IOException {
+        Facade.log(5);
+        Facade.log(-3);
+        Facade.log("str");
+
+        assertSysoutEquals("primitive: 2");
+    }
+
 }

@@ -3,7 +3,7 @@ package com.acme.dbo.txlog.decorator;
 import com.acme.dbo.txlog.domain.Message;
 
 public abstract class PrefixMessageDecorator implements Message {
-    private String prefix;
+    private final String prefix;
 
     protected PrefixMessageDecorator(String prefix){
         this.prefix = prefix;

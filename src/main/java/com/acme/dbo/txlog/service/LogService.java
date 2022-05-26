@@ -1,14 +1,9 @@
 package com.acme.dbo.txlog.service;
 
-import com.acme.dbo.txlog.domain.ByteMessage;
 import com.acme.dbo.txlog.domain.Message;
 import com.acme.dbo.txlog.printer.ConsoleMessagePrinter;
 import com.acme.dbo.txlog.printer.MessagePrinter;
-import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
-import com.acme.dbo.txlog.domain.IntMessage;
-import com.acme.dbo.txlog.domain.StringMessage;
 
-import java.util.Objects;
 
 public class LogService {
     private long IntegerAccumulator;
@@ -19,12 +14,18 @@ public class LogService {
     private boolean NeedIntegerFlush;
     private boolean NeedStringFlush;
     private boolean NeedByteFlush;
-    private String lastMessage;
+
+    private Message lastMessage; //should add logic for NPE when it's not initialize;
+    //as idea - replace messsage and lastMessage into equal...but also need protect from null;
 
     private MessagePrinter printer = new ConsoleMessagePrinter();
 
     public void log(Message message) {
-        printer.print(message.decorate());
+        if (message.isSame(lastMessage)) {
+            lastMessage.accumulate(message);
+        } else {
+            printer.print(lastMessage.decorate());
+        }
     }
 
     /*
