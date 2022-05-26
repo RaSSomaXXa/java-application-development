@@ -1,5 +1,7 @@
 package com.acme.dbo.txlog.service;
 
+import com.acme.dbo.txlog.domain.ByteMessage;
+import com.acme.dbo.txlog.domain.Message;
 import com.acme.dbo.txlog.printer.ConsoleMessagePrinter;
 import com.acme.dbo.txlog.printer.MessagePrinter;
 import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
@@ -19,60 +21,35 @@ public class LogService {
     private boolean NeedByteFlush;
     private String lastMessage;
 
-    MessagePrinter MessagePrinter = new ConsoleMessagePrinter();
-    PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
+    private MessagePrinter printer = new ConsoleMessagePrinter();
+    private PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
 
-    public void log(IntMessage message) {
-        if (this.isActiveStringFlush()) flushString();
-        if (this.isActiveByteFlush()) flushByte();
-        this.setActiveIntegerFlush();
-        this.IntegerAccumulator(message.getBody());
-    }
 
-    public void log(byte message) {
-        if (isActiveStringFlush()) flushString();
-        if (isActiveIntegerFlush()) flushInteger();
-        setActiveByteFlush();
-        ByteAccumulator(message);
-    }
-
-    public void log(char message) {
-        MessagePrinter.print(prefixMessageDecorator.decorateMessage(message));
-    }
-
-    public void log(StringMessage message) {
-        if (isActiveIntegerFlush()) flushInteger();
-        if (isActiveByteFlush()) flushByte();
-        if (isChangedStringMessage(message.getBody())) flushString();
-        setActiveStringFlush();
-        StringAccumulator(message.getBody());
-    }
-
-    public void log(boolean message) {
-        MessagePrinter.print(prefixMessageDecorator.decorateMessage(message));
+    public void log(Message message) {
+        printer.print(message.decorate());
     }
 
     public void log(Object message) {
-        MessagePrinter.print(prefixMessageDecorator.decorateMessage(message));
+        printer.print(prefixMessageDecorator.decorateMessage(message));
     }
     public void log(int[] message) {
-        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
+        printer.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(int[][] message) {
-        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
+        printer.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(int[][][][] message) {
-        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
+        printer.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(String... message) {
-        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
+        printer.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
     public void log(Integer... message) {
-        MessagePrinter.print((prefixMessageDecorator.decorateMessage(message)));
+        printer.print((prefixMessageDecorator.decorateMessage(message)));
     }
 
 
@@ -102,9 +79,9 @@ public class LogService {
 
     public void flushInteger() {
         for (int i = 0; i < IntegerOverflowCount; i++) {
-            MessagePrinter.print(prefixMessageDecorator.decorateMessage((int)Integer.MAX_VALUE));
+            printer.print(prefixMessageDecorator.decorateMessage((int)Integer.MAX_VALUE));
         }
-        MessagePrinter.print(prefixMessageDecorator.decorateMessage((int)IntegerAccumulator));
+        printer.print(prefixMessageDecorator.decorateMessage((int)IntegerAccumulator));
         IntegerAccumulator = 0;
         IntegerOverflowCount = 0;
         NeedIntegerFlush = false;
@@ -112,9 +89,9 @@ public class LogService {
 
     public void flushByte() {
         for (int i = 0; i < ByteOverflowCount; i++) {
-            MessagePrinter.print(prefixMessageDecorator.decorateMessage((byte)Byte.MAX_VALUE));
+            printer.print(prefixMessageDecorator.decorateMessage((byte)Byte.MAX_VALUE));
         }
-        MessagePrinter.print(prefixMessageDecorator.decorateMessage((byte)ByteAccumulator));
+        printer.print(prefixMessageDecorator.decorateMessage((byte)ByteAccumulator));
         ByteAccumulator = 0;
         ByteOverflowCount = 0;
         NeedByteFlush = false;
@@ -122,9 +99,9 @@ public class LogService {
 
     public void flushString() {
         if (StringAccumulator == 1) {
-            MessagePrinter.print(prefixMessageDecorator.decorateMessage(lastMessage));
+            printer.print(prefixMessageDecorator.decorateMessage(lastMessage));
         } else if (StringAccumulator > 1) {
-            MessagePrinter.print(prefixMessageDecorator.decorateMessage(lastMessage + " (x" + StringAccumulator) + ")");
+            printer.print(prefixMessageDecorator.decorateMessage(lastMessage + " (x" + StringAccumulator) + ")");
         }
         StringAccumulator = 0;
         lastMessage = null;

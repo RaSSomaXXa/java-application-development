@@ -1,7 +1,6 @@
 package com.acme.dbo.txlog;
 
-import com.acme.dbo.txlog.domain.IntMessage;
-import com.acme.dbo.txlog.domain.StringMessage;
+import com.acme.dbo.txlog.domain.*;
 import com.acme.dbo.txlog.service.LogService;
 
 import java.util.Objects;
@@ -15,11 +14,11 @@ public class Facade {
     }
 
     public static void log(byte message) {
-        logService.log(message);
+        logService.log(new ByteMessage(message));
     }
 
     public static void log(char message) {
-        logService.log(message);
+        logService.log(new CharMessage(message));
     }
 
     public static void log(String message) {
@@ -27,12 +26,14 @@ public class Facade {
     }
 
     public static void log(boolean message) {
-        logService.log(message);
+        logService.log(new BooleanMessage(message));
     }
 
     public static void log(Object message) {
         logService.log(message);
     }
+
+    /*
 
     public static void flushInteger() {
         logService.flushInteger();
@@ -48,7 +49,7 @@ public class Facade {
 
 
 
-/*    public void log(byte message) {
+        public void log(byte message) {
         if (isActiveStringFlush()) flushString();
         if (isActiveIntegerFlush()) flushInteger();
         setActiveByteFlush();

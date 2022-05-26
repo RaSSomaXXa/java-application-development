@@ -1,34 +1,34 @@
 package com.acme.dbo.txlog.domain;
 
-public class IntMessage implements Message {
+public class BooleanMessage implements Message {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
-    int body;
+    boolean body;
 
-    public int getBody() {
+    public boolean getBody() {
         return body;
     }
 
-    public void setBody(int body) {
+    public void setBody(boolean body) {
         this.body = body;
     }
 
-    public IntMessage(int body){
+    public BooleanMessage(boolean body){
         this.setBody(body);
     }
 
     @Override
     public String decorate() {
-        return PRIMITIVE_PREFIX + Integer.valueOf(getBody()).toString();
+        return PRIMITIVE_PREFIX + getBody();
     }
 
     @Override
     public boolean isSame(Message message) {
-        return message instanceof IntMessage;
+        return message instanceof BooleanMessage;
     }
 
     @Override
     public void accumulate(Message message) {
-        this.body += ((IntMessage)message).body;
+
     }
 
 }

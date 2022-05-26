@@ -1,6 +1,7 @@
 package com.acme.dbo.txlog.decorator;
 
 public class PrefixMessageDecorator {
+
     private static final String PRIMITIVE_PREFIX = "primitive";
     private static final String CHAR_PREFIX = "char";
     private static final String STRING_PREFIX = "string";
@@ -8,6 +9,7 @@ public class PrefixMessageDecorator {
     private static final String PRIMITIVES_ARRAY_PREFIX = "primitives array";
     private static final String PRIMITIVES_MATRIX_PREFIX = "primitives matrix";
     private static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix";
+
 
     public String decorateMessage(int message) {
         return PRIMITIVE_PREFIX + ": " + message;
