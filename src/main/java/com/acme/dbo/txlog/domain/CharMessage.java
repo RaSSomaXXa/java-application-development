@@ -4,7 +4,7 @@ import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
 
 public class CharMessage extends PrefixMessageDecorator {
     private static final String CHAR_PREFIX = "char: ";
-    char body;
+    private char body;
 
     public char getBody() {
         return body;

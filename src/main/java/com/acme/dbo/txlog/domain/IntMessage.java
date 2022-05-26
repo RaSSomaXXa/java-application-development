@@ -4,7 +4,7 @@ import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
 
 public class IntMessage extends PrefixMessageDecorator {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
-    int body;
+    private int body;
 
     public int getBody() {
         return body;
@@ -31,7 +31,7 @@ public class IntMessage extends PrefixMessageDecorator {
 
     @Override
     public void accumulate(Message message) {
-        this.body += ((IntMessage)message).body;
+        this.body += ((IntMessage)message).getBody();
     }
 
 }

@@ -22,16 +22,13 @@ public class LogService {
     private String lastMessage;
 
     private MessagePrinter printer = new ConsoleMessagePrinter();
-    //private PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
-
 
     public void log(Message message) {
         printer.print(message.decorate());
     }
+
     /*
-    public void log(Object message) {
-        printer.print(prefixMessageDecorator.decorateMessage(message));
-    }
+
     public void log(int[] message) {
         printer.print((prefixMessageDecorator.decorateMessage(message)));
     }

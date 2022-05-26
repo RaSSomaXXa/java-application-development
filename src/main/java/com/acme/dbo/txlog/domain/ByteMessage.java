@@ -4,7 +4,7 @@ import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
 
 public class ByteMessage extends PrefixMessageDecorator {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
-    byte body;
+    private byte body;
 
     public byte getBody() {
         return body;

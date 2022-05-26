@@ -14,29 +14,6 @@ public abstract class PrefixMessageDecorator implements Message {
     }
 
     /*
-    public String decorateMessage(int message) {
-        return PRIMITIVE_PREFIX + ": " + message;
-    }
-
-    public static String decorateMessage(byte message) {
-        return PRIMITIVE_PREFIX + ": " + message;
-    }
-
-    public static String decorateMessage(char message) {
-        return CHAR_PREFIX + ": " + message;
-    }
-
-    public String decorateMessage(String message) {
-        return STRING_PREFIX + ": " + message;
-    }
-
-    public static String decorateMessage(boolean message) {
-        return PRIMITIVE_PREFIX + ": " + message;
-    }
-
-    public static String decorateMessage(Object message) {
-        return REFERENCE_PREFIX + ": " + message;
-    }
 
     public static String decorateMessage(int[] message) {
         String arrayContain = decorateRaw(message);

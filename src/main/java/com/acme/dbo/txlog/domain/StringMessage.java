@@ -31,6 +31,6 @@ public class StringMessage extends PrefixMessageDecorator {
 
     @Override
     public void accumulate(Message message) {
-        this.body += ((StringMessage)message).body;
+        this.body += ((StringMessage)message).getBody();
     }
 }

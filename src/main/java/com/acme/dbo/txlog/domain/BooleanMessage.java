@@ -4,7 +4,7 @@ import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
 
 public class BooleanMessage extends PrefixMessageDecorator {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
-    boolean body;
+    private boolean body;
 
     public boolean getBody() {
         return body;
@@ -31,7 +31,7 @@ public class BooleanMessage extends PrefixMessageDecorator {
 
     @Override
     public void accumulate(Message message) {
-
+        this.body = this.body & ((BooleanMessage)message).getBody();
     }
 
 }
