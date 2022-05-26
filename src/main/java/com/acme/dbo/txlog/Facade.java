@@ -30,7 +30,7 @@ public class Facade {
     }
 
     public static void log(Object message) {
-        logService.log(message);
+        logService.log(new ObjectMessage());
     }
 
     /*

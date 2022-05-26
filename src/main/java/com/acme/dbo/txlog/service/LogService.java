@@ -22,13 +22,13 @@ public class LogService {
     private String lastMessage;
 
     private MessagePrinter printer = new ConsoleMessagePrinter();
-    private PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
+    //private PrefixMessageDecorator prefixMessageDecorator = new PrefixMessageDecorator();
 
 
     public void log(Message message) {
         printer.print(message.decorate());
     }
-
+    /*
     public void log(Object message) {
         printer.print(prefixMessageDecorator.decorateMessage(message));
     }
@@ -132,4 +132,6 @@ public class LogService {
             IntegerAccumulator = IntegerAccumulator % Integer.MAX_VALUE;
         }
     }
+
+     */
 }

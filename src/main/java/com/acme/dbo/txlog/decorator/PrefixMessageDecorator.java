@@ -1,16 +1,19 @@
 package com.acme.dbo.txlog.decorator;
 
-public class PrefixMessageDecorator {
+import com.acme.dbo.txlog.domain.Message;
 
-    private static final String PRIMITIVE_PREFIX = "primitive";
-    private static final String CHAR_PREFIX = "char";
-    private static final String STRING_PREFIX = "string";
-    private static final String REFERENCE_PREFIX = "reference";
-    private static final String PRIMITIVES_ARRAY_PREFIX = "primitives array";
-    private static final String PRIMITIVES_MATRIX_PREFIX = "primitives matrix";
-    private static final String PRIMITIVE_MULTIMATRIX_PREFIX = "primitives multimatrix";
+public abstract class PrefixMessageDecorator implements Message {
+    private String prefix;
 
+    protected PrefixMessageDecorator(String prefix){
+        this.prefix = prefix;
+    }
 
+    protected String decorate(String body){
+        return prefix + body;
+    }
+
+    /*
     public String decorateMessage(int message) {
         return PRIMITIVE_PREFIX + ": " + message;
     }
@@ -96,5 +99,7 @@ public class PrefixMessageDecorator {
         }
         return String.valueOf(sum);
     }
+
+     */
 
 }

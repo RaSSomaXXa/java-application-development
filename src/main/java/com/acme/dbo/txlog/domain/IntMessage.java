@@ -1,6 +1,8 @@
 package com.acme.dbo.txlog.domain;
 
-public class IntMessage implements Message {
+import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
+
+public class IntMessage extends PrefixMessageDecorator {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
     int body;
 
@@ -13,12 +15,13 @@ public class IntMessage implements Message {
     }
 
     public IntMessage(int body){
+        super(PRIMITIVE_PREFIX);
         this.setBody(body);
     }
 
     @Override
     public String decorate() {
-        return PRIMITIVE_PREFIX + Integer.valueOf(getBody()).toString();
+        return super.decorate(Integer.valueOf(getBody()).toString());
     }
 
     @Override

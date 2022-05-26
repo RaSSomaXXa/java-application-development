@@ -1,6 +1,8 @@
 package com.acme.dbo.txlog.domain;
 
-public class BooleanMessage implements Message {
+import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
+
+public class BooleanMessage extends PrefixMessageDecorator {
     private static final String PRIMITIVE_PREFIX = "primitive: ";
     boolean body;
 
@@ -13,12 +15,13 @@ public class BooleanMessage implements Message {
     }
 
     public BooleanMessage(boolean body){
+        super(PRIMITIVE_PREFIX);
         this.setBody(body);
     }
 
     @Override
     public String decorate() {
-        return PRIMITIVE_PREFIX + getBody();
+        return super.decorate(String.valueOf(getBody()));
     }
 
     @Override

@@ -58,7 +58,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-
     @Test
     public void shouldLogChar() throws IOException {
         //region when

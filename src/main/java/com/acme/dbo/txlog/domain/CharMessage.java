@@ -1,6 +1,8 @@
 package com.acme.dbo.txlog.domain;
 
-public class CharMessage implements Message {
+import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
+
+public class CharMessage extends PrefixMessageDecorator {
     private static final String CHAR_PREFIX = "char: ";
     char body;
 
@@ -13,12 +15,13 @@ public class CharMessage implements Message {
     }
 
     public CharMessage(char body){
+        super(CHAR_PREFIX);
         this.setBody(body);
     }
 
     @Override
     public String decorate() {
-        return CHAR_PREFIX + getBody();
+        return super.decorate(String.valueOf(getBody()));
     }
 
     @Override
