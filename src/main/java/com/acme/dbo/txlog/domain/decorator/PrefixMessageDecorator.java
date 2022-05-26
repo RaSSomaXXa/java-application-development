@@ -1,4 +1,4 @@
-package com.acme.dbo.txlog.decorator;
+package com.acme.dbo.txlog.domain.decorator;
 
 import com.acme.dbo.txlog.domain.Message;
 

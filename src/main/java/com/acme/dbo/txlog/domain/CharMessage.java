@@ -1,6 +1,6 @@
 package com.acme.dbo.txlog.domain;
 
-import com.acme.dbo.txlog.decorator.PrefixMessageDecorator;
+import com.acme.dbo.txlog.domain.decorator.PrefixMessageDecorator;
 
 public class CharMessage extends PrefixMessageDecorator {
     private static final String CHAR_PREFIX = "char: ";

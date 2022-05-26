@@ -6,6 +6,7 @@ import com.acme.dbo.txlog.printer.MessagePrinter;
 
 
 public class LogService {
+
     private long IntegerAccumulator;
     private long IntegerOverflowCount;
     private int StringAccumulator;
@@ -15,7 +16,8 @@ public class LogService {
     private boolean NeedStringFlush;
     private boolean NeedByteFlush;
 
-    private Message lastMessage; //should add logic for NPE when it's not initialize;
+    private Message lastMessage;
+    //should add logic for NPE when it's not initialize;
     //as idea - replace messsage and lastMessage into equal...but also need protect from null;
 
     private MessagePrinter printer = new ConsoleMessagePrinter();
