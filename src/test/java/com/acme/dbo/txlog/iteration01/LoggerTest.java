@@ -26,11 +26,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Facade.log(1);
-        Facade.flushInteger();
+        Facade.flush();
         Facade.log(0);
-        Facade.flushInteger();
+        Facade.flush();
         Facade.log(-1);
-        Facade.flushInteger();
+        Facade.fullflush();
         //endregion
 
         //region then
@@ -43,11 +43,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogByte() throws IOException {
         //region when
         Facade.log((byte)1);
-        //Facade.flushByte();
+        Facade.flush();
         Facade.log((byte)0);
-        //Facade.flushByte();
+        Facade.flush();
         Facade.log((byte)-1);
-        //Facade.flushByte();
+        Facade.fullflush();
         //endregion
 
         //region then
@@ -62,7 +62,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         //region when
         Facade.log('a');
+        Facade.fullflush();
         Facade.log('b');
+        Facade.fullflush();
         //endregion
 
         //region then
@@ -77,9 +79,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogString() throws IOException {
         //region when
         Facade.log("test string 1");
-        //Facade.flushString();
+        Facade.flush();
         Facade.log("other str");
-        //Facade.flushString();
+        Facade.fullflush();
         //endregion
 
         //region then
@@ -94,7 +96,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogBoolean() throws IOException {
         //region when
         Facade.log(true);
+        Facade.flush();
         Facade.log(false);
+        Facade.fullflush();
         //endregion
 
         //region then
@@ -109,6 +113,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogReference() throws IOException {
         //region when
         Facade.log(new Object());
+        Facade.fullflush();
         //endregion
 
         //region then

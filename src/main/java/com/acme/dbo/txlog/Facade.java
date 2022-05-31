@@ -34,8 +34,12 @@ public class Facade {
     }
 
 
-    public static void flushInteger() {
+    public static void flush() {
         logService.flush();
+    }
+
+    public static void fullflush() {
+        logService.fullFlush();
     }
 
     /*

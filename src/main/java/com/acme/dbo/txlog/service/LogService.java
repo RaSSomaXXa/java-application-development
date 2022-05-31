@@ -29,7 +29,8 @@ public class LogService {
         if (!(Objects.equals(null,lastMessage)) && lastMessage.isSame(message)) {
             lastMessage.accumulate(message);
         } else if (!(Objects.equals(null,lastMessage))){
-            printer.print(lastMessage.decorate());
+            //printer.print(lastMessage.decorate());
+            this.fullFlush();
         } else {
             lastMessage = message;
         }
@@ -40,6 +41,10 @@ public class LogService {
         lastMessage.flush();
     }
 
+    public void fullFlush() {
+        printer.print(lastMessage.decorate());
+        lastMessage = null;
+    }
     /*
 
     public void log(int[] message) {

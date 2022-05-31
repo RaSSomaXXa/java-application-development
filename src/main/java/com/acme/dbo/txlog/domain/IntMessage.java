@@ -36,7 +36,6 @@ public class IntMessage extends PrefixMessageDecorator {
 
     @Override
     public void flush() {
-        this.decorate();
         this.setBody(0);
     }
 }
