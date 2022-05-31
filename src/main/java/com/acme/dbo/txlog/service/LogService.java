@@ -35,6 +35,11 @@ public class LogService {
         }
     }
 
+    public void flush() {
+        printer.print(lastMessage.decorate());
+        lastMessage.flush();
+    }
+
     /*
 
     public void log(int[] message) {

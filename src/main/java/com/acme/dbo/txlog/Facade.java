@@ -35,7 +35,7 @@ public class Facade {
 
 
     public static void flushInteger() {
-
+        logService.flush();
     }
 
     /*
