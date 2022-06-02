@@ -1,6 +1,7 @@
 package com.acme.dbo.txlog;
 
 import com.acme.dbo.txlog.domain.*;
+import com.acme.dbo.txlog.service.LogOperationException;
 import com.acme.dbo.txlog.service.LogService;
 
 import java.util.Objects;
@@ -9,36 +10,36 @@ public class Facade {
 
     private static LogService logService = new LogService();
 
-    public static void log(int message) {
+    public static void log(int message) throws LogOperationException {
         logService.log(new IntMessage(message));
     }
 
-    public static void log(byte message) {
+    public static void log(byte message) throws LogOperationException {
         logService.log(new ByteMessage(message));
     }
 
-    public static void log(char message) {
+    public static void log(char message) throws LogOperationException {
         logService.log(new CharMessage(message));
     }
 
-    public static void log(String message) {
+    public static void log(String message) throws LogOperationException {
         logService.log(new StringMessage(message));
     }
 
-    public static void log(boolean message) {
+    public static void log(boolean message) throws LogOperationException {
         logService.log(new BooleanMessage(message));
     }
 
-    public static void log(Object message) {
+    public static void log(Object message) throws LogOperationException {
         logService.log(new ObjectMessage());
     }
 
 
-    public static void flush() {
+    public static void flush() throws LogOperationException {
         logService.flush();
     }
 
-    public static void fullflush() {
+    public static void fullflush() throws LogOperationException {
         logService.fullFlush();
     }
 

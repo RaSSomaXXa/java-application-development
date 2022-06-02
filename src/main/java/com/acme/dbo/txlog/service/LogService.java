@@ -3,6 +3,7 @@ package com.acme.dbo.txlog.service;
 import com.acme.dbo.txlog.domain.Message;
 import com.acme.dbo.txlog.printer.ConsoleMessagePrinter;
 import com.acme.dbo.txlog.printer.MessagePrinter;
+import com.acme.dbo.txlog.printer.PrintOperationException;
 
 import java.util.Objects;
 
@@ -25,7 +26,7 @@ public class LogService {
 
     private MessagePrinter printer = new ConsoleMessagePrinter();
 
-    public void log(Message message) {
+    public void log(Message message) throws LogOperationException {
         if (!(Objects.equals(null,lastMessage)) && lastMessage.isSame(message)) {
             lastMessage.accumulate(message);
         } else if (!(Objects.equals(null,lastMessage))){
@@ -36,14 +37,22 @@ public class LogService {
         }
     }
 
-    public void flush() {
-        printer.print(lastMessage.decorate());
-        lastMessage.flush();
+    public void flush() throws LogOperationException{
+        try {
+            printer.print(lastMessage.decorate());
+            lastMessage.flush();
+        } catch (PrintOperationException e) {
+            throw new LogOperationException("message: " + lastMessage.decorate(), e);
+        }
     }
 
-    public void fullFlush() {
-        printer.print(lastMessage.decorate());
-        lastMessage = null;
+    public void fullFlush() throws LogOperationException{
+        try {
+            printer.print(lastMessage.decorate());
+            lastMessage = null;
+        } catch (PrintOperationException e) {
+            throw new LogOperationException("message: " + lastMessage.decorate(), e);
+        }
     }
     /*
 
